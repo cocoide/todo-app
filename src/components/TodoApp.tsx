@@ -1,5 +1,6 @@
 import { FC, useState } from "react"
 import { PlusCircleIcon } from '@heroicons/react/24/outline'
+import { toUnicode } from "punycode"
 type Todo = {
     value: string
     readonly id: number
@@ -26,9 +27,31 @@ export const TodoApp: FC = () => {
         //入力をクリア
         setText("")
     }
+    const handleOnEdit = (id: number, value: string) => {
+        /**
+         * 『ディープ・コピー』
+         * 以下と同義
+         * const deepCopy = todos.map((todo) => ({
+         *   value: todo.value,
+         *   id: todo.id,
+         * }));
+         */
+        const deepCopy = todos.map((todo) => ({ ...todo }));
+        // ディープコピーされた配列に Array.map() を適用
+        const newTodos = deepCopy.map((todo) => {
+            if (todo.id === id) {
+                todo.value = value;
+            }
+            return todo;
+        });
+        // todos ステート配列をチェック（あとでコメントアウト）
+        console.log('=== Original todos ===');
+        todos.map((todo) => console.log(`id: ${todo.id}, value: ${todo.value}`));
+        setTodos(newTodos);
+    };
 
     return (
-        <div className="rounded shadow-inner">
+        <div className="">
             <form
                 onSubmit={(e) => {
                     e.preventDefault()
@@ -38,10 +61,10 @@ export const TodoApp: FC = () => {
 
                 <input
                     type="text"
-                    placeholder="NEW TODO ++ "
+                    placeholder="NEW TODO ++"
                     value={text}
                     onChange={(e) => setText(e.target.value)}
-                    className="outline-purple-200 text-center"
+                    className="outline-purple-200 text-center flex-1"
                 />
                 {/* <PlusCircleIcon className="h-6 w-6 ml-1 text-purple-300" /> */}
                 <input
@@ -53,8 +76,14 @@ export const TodoApp: FC = () => {
 
             <ul>
                 {todos.map((todo) => {
-                    return <li className="bg-white my-2 h-10 text-center text-slate-600"
-                        key={todo.id}>{todo.value}
+                    return <li key={todo.id}
+                        className="bg-white my-2 h-10 text-center text-slate-600 flex place-items-center"
+                    ><input
+                            type="text"
+                            value={todo.value}
+                            onChange={(e) => handleOnEdit(todo.id, e.target.value)}
+                            className="h-10 w-full pl-3 outline-purple-200"
+                        />
                     </li>
                 })}
             </ul>
