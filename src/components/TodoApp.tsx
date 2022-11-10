@@ -1,17 +1,19 @@
 import { FC, useState } from "react"
 import { PlusCircleIcon, ArchiveBoxIcon } from '@heroicons/react/24/outline'
-import { ArchiveBoxXMarkIcon } from '@heroicons/react/24/solid'
+import { ArchiveBoxXMarkIcon, SwatchIcon, TrashIcon, XCircleIcon } from '@heroicons/react/24/solid'
 
 type Todo = {
     value: string
-    readonly id: number
+    readonly id: number // readonly 識別子を一意に保つ
     checked: boolean
     removed: boolean
 }
-//readonly 識別子を一意に保つ
+type Filter = "all" | "checked" | "unchecked" | "removed";
+
 export const TodoApp: FC = () => {
     const [text, setText] = useState("")
     const [todos, setTodos] = useState<Todo[]>([])
+    const [filter, setFilter] = useState<Filter>("all");
 
     const handleOnSubmit = (
         e: React.FormEvent<HTMLFormElement | HTMLInputElement>
@@ -50,8 +52,6 @@ export const TodoApp: FC = () => {
             }
             return todo;
         });
-        // todos ステート配列をチェック（あとでコメントアウト）
-        console.log('=== Original todos ===');
         todos.map((todo) => console.log(`id: ${todo.id}, value: ${todo.value}`));
         setTodos(newTodos);
     };
@@ -60,9 +60,7 @@ export const TodoApp: FC = () => {
         const deepCopy = todos.map((todo) => ({ ...todo }));
 
         const newTodos = deepCopy.map((todo) => {
-            if (todo.id === id) {
-                todo.checked = !checked;
-            }
+            if (todo.id === id) { todo.checked = !checked }
             return todo;
         });
 
@@ -73,24 +71,46 @@ export const TodoApp: FC = () => {
         const deepCopy = todos.map((todo) => ({ ...todo }));
 
         const newTodos = deepCopy.map((todo) => {
-            if (todo.id === id) {
-                todo.removed = !removed;
-            }
+            if (todo.id === id) { todo.removed = !removed }
             return todo;
         });
-
         setTodos(newTodos);
     };
 
+    const handleOnEmpty = () => {
+        // シャローコピーで事足りる
+        const newTodos = todos.filter((todo) => !todo.removed);
+        setTodos(newTodos);
+    };
+
+    const filteredTodos = todos.filter((todo) => {
+        // filter ステートの値に応じて異なる内容の配列を返す
+        switch (filter) {
+            case 'all':
+                // 削除されていないもの全て
+                return !todo.removed;
+            case 'checked':
+                // 完了済 **かつ** 削除されていないもの
+                return todo.checked && !todo.removed;
+            case 'unchecked':
+                // 未完了 **かつ** 削除されていないもの
+                return !todo.checked && !todo.removed;
+            case 'removed':
+                // 削除済みのもの
+                return todo.removed;
+            default:
+                return todo;
+        }
+    });
+
     return (
-        <div className="">
+        <div>
             <form
                 onSubmit={(e) => {
                     e.preventDefault()
                     handleOnSubmit(e)
                 }}
                 className="flex flex-raw bg-white h-10">
-
                 <input
                     type="text"
                     placeholder="+ NEW TODO"
@@ -98,16 +118,36 @@ export const TodoApp: FC = () => {
                     onChange={(e) => setText(e.target.value)}
                     className="outline-purple-200 text-center flex-1"
                 />
-                <button
-                    type="submit"
-                    onSubmit={(e) => e.preventDefault()}
-                    className="text-purple-300"><PlusCircleIcon className="h-6 w-6 m-2 text-purple-300" /></button>
+
+                {filter === 'removed' ? (
+                    <button
+                        onClick={() => handleOnRemove}
+                        disabled={todos.filter((todo) => todo.removed).length === 0}>
+                        <XCircleIcon className="w-6 h-6 text-purple-300 m-2" />
+                    </button>
+                ) : (
+                    // フィルターが `checked` でなければ入力フォームを表示
+                    filter !== 'checked' && (
+                        <button
+                            type="submit"
+                            onSubmit={(e) => e.preventDefault()}
+                            className="text-purple-300"><PlusCircleIcon className="h-6 w-6 m-2 text-purple-300" />
+                        </button>))}
+
             </form>
+            <select defaultValue="all"
+                onChange={(e) => setFilter(e.target.value as Filter)}
+                className="w-20 mt-3 h-7">
+                <option value="all">全て</option>
+                <option value="unchecked">未完了</option>
+                <option value="checked">完了済</option>
+                <option value="removed">削除済</option>
+            </select>
 
             <ul>
-                {todos.map((todo) => {
+                {filteredTodos.map((todo) => {
                     return <li key={todo.id}
-                        className="bg-white my-2 h-10 text-center text-slate-600 flex place-items-center"
+                        className="bg-white my-3 h-10 text-center text-slate-600 flex place-items-center"
                     ><input
                             type="checkbox"
                             checked={todo.checked}
