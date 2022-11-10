@@ -1,17 +1,22 @@
 import { FC, useState } from "react"
 import { PlusCircleIcon } from '@heroicons/react/24/outline'
-
 type Todo = {
     value: string
+    readonly id: number
 }
+//readonly 識別子を一意に保つ
 export const TodoApp: FC = () => {
     const [text, setText] = useState("")
     const [todos, setTodos] = useState<Todo[]>([])
-    const handleOnSubmit = () => {
+
+    const handleOnSubmit = (
+        e: React.FormEvent<HTMLFormElement | HTMLInputElement>
+    ) => {
         // TODOが未入力なら、TODOを新規作成
         if (!text) return
         const newTodo: Todo = {
-            value: text
+            value: text,
+            id: new Date().getTime(),
         }
         // 以下のスプレッド構文の詳細
         //  const copyTodos = todos.slice();
@@ -27,7 +32,7 @@ export const TodoApp: FC = () => {
             <form
                 onSubmit={(e) => {
                     e.preventDefault()
-                    handleOnSubmit()
+                    handleOnSubmit(e)
                 }}
                 className="flex flex-raw bg-white h-10">
 
@@ -45,6 +50,14 @@ export const TodoApp: FC = () => {
                     onSubmit={(e) => e.preventDefault()}
                     className="text-purple-300 h-10 w-10" />
             </form>
+
+            <ul>
+                {todos.map((todo) => {
+                    return <li className="bg-white my-2 h-10 text-center text-slate-600"
+                        key={todo.id}>{todo.value}
+                    </li>
+                })}
+            </ul>
         </div >
     )
 }

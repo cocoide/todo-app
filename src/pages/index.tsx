@@ -16,7 +16,7 @@ export default function Home() {
 
         <h1 className="text-5xl p-10 text-center font-bold text-white place-items-center flex flex-row justify-center"
         ><ShareIcon className='h-10 w-10 mr-3' />To Do Share</h1>
-        <div className="h-80 w-80 m-auto bg-gray-50 rounded-md 
+        <div className="md:mx-20 xl:mx-40 mx-12 p-20  bg-gray-50 rounded-md 
         flex justify-center place-items-center shadow-purple-300/50">
 
           <TodoApp />
