@@ -14,9 +14,10 @@ export default function Home() {
 
       <div>
 
-        <h1 className="text-5xl p-4 text-center font-bold text-white mb-10"
+        <h1 className="text-5xl p-10 text-center font-bold text-white"
         >Share To Do</h1>
-        <div className="h-80 w-80 m-auto bg-gray-50 rounded-md shadow-inner flex justify-center place-items-center">
+        <div className="h-80 w-80 m-auto bg-gray-50 rounded-md 
+        flex justify-center place-items-center shadow-purple-300/50">
 
           <TodoApp />
 
