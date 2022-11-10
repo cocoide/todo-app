@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { TodoApp } from '../components/TodoApp'
 
 
 export default function Home() {
@@ -17,15 +18,7 @@ export default function Home() {
         >Share To Do</h1>
         <div className="h-80 w-80 m-auto bg-gray-50 rounded-md shadow-inner flex justify-center place-items-center">
 
-          <form onSubmit={(e) => e.preventDefault()}>
-            <input type="text" value="text" onChange={(e) => e.preventDefault()} />
-            <input
-              type="submit"
-              value="追加"
-              onSubmit={(e) => e.preventDefault()}
-            />
-          </form>
-
+          <TodoApp />
 
         </div>
       </div>
