@@ -1,1 +1,1 @@
-Simple ToDo Aplication
+Simple Todo Aplication
