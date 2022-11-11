@@ -78,7 +78,7 @@ export const TodoApp: FC = () => {
     };
 
     const handleOnEmpty = () => {
-        // シャローコピーで事足りる
+        // シャローコピー
         const newTodos = todos.filter((todo) => !todo.removed);
         setTodos(newTodos);
     };
@@ -121,7 +121,7 @@ export const TodoApp: FC = () => {
 
                 {filter === 'removed' ? (
                     <button
-                        onClick={() => handleOnRemove}
+                        onClick={handleOnEmpty}
                         disabled={todos.filter((todo) => todo.removed).length === 0}>
                         <XCircleIcon className="w-6 h-6 text-purple-300 m-2" />
                     </button>
@@ -132,7 +132,8 @@ export const TodoApp: FC = () => {
                             type="submit"
                             onSubmit={(e) => e.preventDefault()}
                             className="text-purple-300"><PlusCircleIcon className="h-6 w-6 m-2 text-purple-300" />
-                        </button>))}
+                        </button>
+                    ))}
 
             </form>
             <select defaultValue="all"
