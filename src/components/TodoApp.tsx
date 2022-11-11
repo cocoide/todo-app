@@ -2,18 +2,36 @@ import { FC, useState } from "react"
 import { PlusCircleIcon, ArchiveBoxIcon } from '@heroicons/react/24/outline'
 import { ArchiveBoxXMarkIcon, SwatchIcon, TrashIcon, XCircleIcon } from '@heroicons/react/24/solid'
 
-type Todo = {
-    value: string
-    readonly id: number // readonly 識別子を一意に保つ
-    checked: boolean
-    removed: boolean
-}
-type Filter = "all" | "checked" | "unchecked" | "removed";
 
 export const TodoApp: FC = () => {
     const [text, setText] = useState("")
     const [todos, setTodos] = useState<Todo[]>([])
     const [filter, setFilter] = useState<Filter>("all");
+
+    // 追加したTodoのプロパティを変化させる関数を
+    // 『ジェネリティクス』を利用して共通なものへ
+    const handleOnTodo = <T extends Todo, U extends keyof Todo, V extends T[U]>(
+        obj: T,
+        key: U,
+        value: V
+    ) => {
+        /**
+         * 『ディープ・コピー』以下と同義
+         * const deepCopy = todos.map((todo) => ({
+         *   value: todo.value,
+         *   id: todo.id,
+         * }));
+         */
+        const deepCopy = todos.map((todo) => ({ ...todo }));
+        // ディープコピーされた配列に Array.map() を適用
+        const newTodos = deepCopy.map((todo) => {
+            if (todo.id === obj.id) {
+                todo[key] = value;
+            }
+            return todo;
+        });
+        setTodos(newTodos);
+    };
 
     const handleOnSubmit = (
         e: React.FormEvent<HTMLFormElement | HTMLInputElement>
@@ -35,47 +53,6 @@ export const TodoApp: FC = () => {
         //入力をクリア
         setText("")
     }
-    const handleOnEdit = (id: number, value: string) => {
-        /**
-         * 『ディープ・コピー』
-         * 以下と同義
-         * const deepCopy = todos.map((todo) => ({
-         *   value: todo.value,
-         *   id: todo.id,
-         * }));
-         */
-        const deepCopy = todos.map((todo) => ({ ...todo }));
-        // ディープコピーされた配列に Array.map() を適用
-        const newTodos = deepCopy.map((todo) => {
-            if (todo.id === id) {
-                todo.value = value;
-            }
-            return todo;
-        });
-        todos.map((todo) => console.log(`id: ${todo.id}, value: ${todo.value}`));
-        setTodos(newTodos);
-    };
-
-    const handleOnCheck = (id: number, checked: boolean) => {
-        const deepCopy = todos.map((todo) => ({ ...todo }));
-
-        const newTodos = deepCopy.map((todo) => {
-            if (todo.id === id) { todo.checked = !checked }
-            return todo;
-        });
-
-        setTodos(newTodos);
-    };
-
-    const handleOnRemove = (id: number, removed: boolean) => {
-        const deepCopy = todos.map((todo) => ({ ...todo }));
-
-        const newTodos = deepCopy.map((todo) => {
-            if (todo.id === id) { todo.removed = !removed }
-            return todo;
-        });
-        setTodos(newTodos);
-    };
 
     const handleOnEmpty = () => {
         // シャローコピー
@@ -148,19 +125,20 @@ export const TodoApp: FC = () => {
             <ul>
                 {filteredTodos.map((todo) => {
                     return <li key={todo.id}
+
                         className="bg-white my-3 h-10 text-center text-slate-600 flex place-items-center"
                     ><input
                             type="checkbox"
                             checked={todo.checked}
-                            onChange={() => handleOnCheck(todo.id, todo.checked)}
+                            onChange={() => handleOnTodo(todo, "checked", !todo.checked)}
                             className="m-3"
                         /><input
                             type="text"
                             disabled={todo.checked || todo.removed}
                             value={todo.value}
-                            onChange={(e) => handleOnEdit(todo.id, e.target.value)}
+                            onChange={(e) => handleOnTodo(todo, "value", e.target.value)}
                             className="h-10 w-full pl-3 outline-purple-200"
-                        /><button onClick={() => handleOnRemove(todo.id, todo.removed)}
+                        /><button onClick={() => handleOnTodo(todo, "removed", !todo.removed)}
                             className="p-2">{todo.removed ? <ArchiveBoxXMarkIcon className="h-6 w-6 text-purple-300" />
                                 : <ArchiveBoxIcon className="h-6 w-6 text-purple-300" />}</button>
                     </li>
