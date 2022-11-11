@@ -1,6 +1,8 @@
 import Head from 'next/head'
 import { TodoApp } from '../components/TodoApp'
 import { AdjustmentsHorizontalIcon } from '@heroicons/react/24/outline'
+import { Header } from '../components/@common/Header'
+import Image from 'next/image'
 
 export default function Home() {
 
@@ -12,10 +14,14 @@ export default function Home() {
       </Head>
 
       <div>
-        <h1 className="text-5xl p-10 text-center font-bold text-white place-items-center 
-        flex flex-row justify-center shadow-purple-300/200"
-        ><AdjustmentsHorizontalIcon className='h-10 w-10 mr-3'
-          />To Do List</h1>
+        <Header />
+
+        <div className='flex justify-center place-items-center p-10'>
+          <Image src="/flower.png" height={200} width={400} alt={""} />
+        </div>
+
+
+
         <div className='mx-20 shadow-purple-300/50'>
           <TodoApp />
         </div>

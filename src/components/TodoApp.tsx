@@ -1,6 +1,4 @@
 import { FC, useState } from "react"
-import { ArchiveBoxIcon } from '@heroicons/react/24/outline'
-import { ArchiveBoxXMarkIcon, SwatchIcon, TrashIcon, XCircleIcon } from '@heroicons/react/24/solid'
 import { FormDialog } from "./FormDialog"
 import { TodoItem } from "./TodoItem"
 
@@ -13,6 +11,7 @@ export const TodoApp: FC = () => {
     const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setText(e.target.value);
     };
+
 
     const handleOnSubmit = () => {
         // TODOが未入力なら、TODOを新規作成
