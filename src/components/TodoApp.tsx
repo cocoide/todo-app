@@ -2,6 +2,7 @@ import { FC, useState } from "react"
 import { ArchiveBoxIcon } from '@heroicons/react/24/outline'
 import { ArchiveBoxXMarkIcon, SwatchIcon, TrashIcon, XCircleIcon } from '@heroicons/react/24/solid'
 import { FormDialog } from "./FormDialog"
+import { TodoItem } from "./TodoItem"
 
 
 export const TodoApp: FC = () => {
@@ -52,27 +53,10 @@ export const TodoApp: FC = () => {
         });
         setTodos(newTodos);
     };
-
-    const filteredTodos = todos.filter((todo) => {
-        // filter ステートの値に応じて異なる内容の配列を返す
-        switch (filter) {
-            case 'all':
-                // 削除されていないもの全て
-                return !todo.removed;
-            case 'checked':
-                // 完了済 **かつ** 削除されていないもの
-                return todo.checked && !todo.removed;
-            case 'unchecked':
-                // 未完了 **かつ** 削除されていないもの
-                return !todo.checked && !todo.removed;
-            case 'removed':
-                // 削除済みのもの
-                return todo.removed;
-            default:
-                return todo;
-        }
-    });
-
+    const handleOnEmpty = () => {
+        const newTodos = todos.filter((todo) => !todo.removed);
+        setTodos(newTodos);
+    };
 
     return (
         <div>
@@ -81,37 +65,9 @@ export const TodoApp: FC = () => {
                 onChange={handleOnChange}
                 onSubmit={handleOnSubmit}
             />
-            <select defaultValue="all"
-                onChange={(e) => setFilter(e.target.value as Filter)}
-                className="w-20 mt-3 h-7">
-                <option value="all">全て</option>
-                <option value="unchecked">未完了</option>
-                <option value="checked">完了済</option>
-                <option value="removed">削除済</option>
-            </select>
 
-            <ul>
-                {filteredTodos.map((todo) => {
-                    return <li key={todo.id}
+            <TodoItem todos={todos} filter={filter} onTodo={handleOnTodo} />
 
-                        className="bg-white my-3 h-10 text-center text-slate-600 flex place-items-center"
-                    ><input
-                            type="checkbox"
-                            checked={todo.checked}
-                            onChange={() => handleOnTodo(todo, "checked", !todo.checked)}
-                            className="m-3"
-                        /><input
-                            type="text"
-                            disabled={todo.checked || todo.removed}
-                            value={todo.value}
-                            onChange={(e) => handleOnTodo(todo, "value", e.target.value)}
-                            className="h-10 w-full pl-3 outline-purple-200"
-                        /><button onClick={() => handleOnTodo(todo, "removed", !todo.removed)}
-                            className="p-2">{todo.removed ? <ArchiveBoxXMarkIcon className="h-6 w-6 text-purple-300" />
-                                : <ArchiveBoxIcon className="h-6 w-6 text-purple-300" />}</button>
-                    </li>
-                })}
-            </ul>
         </div >
     )
 }
