@@ -1,8 +1,9 @@
 import Head from 'next/head'
 import { TodoApp } from '../components/TodoApp'
-import { AdjustmentsHorizontalIcon } from '@heroicons/react/24/outline'
 import { Header } from '../components/@common/Header'
 import Image from 'next/image'
+import { useState } from 'react'
+import Sidebar from '../components/Sidebar'
 
 export default function Home() {
 
@@ -13,6 +14,7 @@ export default function Home() {
         <meta name="description" content="To Do List" />
       </Head>
 
+
       <div>
         <Header />
 
@@ -20,7 +22,7 @@ export default function Home() {
           <Image src="/flower.png" height={200} width={400} alt={""} />
         </div>
 
-
+        <Sidebar />
 
         <div className='mx-20 shadow-purple-300/50'>
           <TodoApp />

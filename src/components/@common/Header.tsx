@@ -4,7 +4,9 @@ import Image from "next/image"
 export const Header = () => {
     return (
         <div className="flex justify-between  place-items-center bg-opacity-70 bg-white m-4  rounded-3xl mb-10">
-            <AdjustmentsHorizontalIcon className='h-10 w-10 text-purple-300 m-3' />
+            <button className="rounded-full">
+                <AdjustmentsHorizontalIcon className='h-10 w-10 text-purple-300 m-3' />
+            </button>
             <h1 className=" text-3xl p-1 font-bold text-purple-300
             shadow-purple-300/200"
             >To Do List</h1>
