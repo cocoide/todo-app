@@ -2,8 +2,6 @@ import Head from 'next/head'
 import { TodoApp } from '../components/TodoApp'
 import { Header } from '../components/@common/Header'
 import Image from 'next/image'
-import { useState } from 'react'
-import Sidebar from '../components/Sidebar'
 
 export default function Home() {
 
@@ -21,8 +19,6 @@ export default function Home() {
         <div className='flex justify-center place-items-center p-10'>
           <Image src="/flower.png" height={200} width={400} alt={""} />
         </div>
-
-        <Sidebar />
 
         <div className='mx-20 shadow-purple-300/50'>
           <TodoApp />
