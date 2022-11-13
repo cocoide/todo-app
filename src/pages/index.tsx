@@ -17,7 +17,7 @@ export default function Home() {
         <Header />
 
         <div className='flex justify-center place-items-center p-10'>
-          <Image src="/flower.png" height={200} width={400} alt={""} />
+          {/* <Image src="/flower.png" height={200} width={400} alt={""} /> */}
         </div>
 
         <div className='mx-20 shadow-purple-300/50'>
