@@ -1,6 +1,7 @@
 import { Dialog } from "@headlessui/react"
 import { XCircleIcon } from "@heroicons/react/24/outline"
-import { useRecoilState, useSetRecoilState } from "recoil"
+import Image from "next/image"
+import { useRecoilState } from "recoil"
 import DrawerMotion from "./DrawerMotion"
 import { isDrawerOpen } from "./isDrawerOpen"
 
@@ -26,7 +27,13 @@ export const Drawer = () => {
                     <div className="relative mt-6 flex-1 px-4 sm:px-6">
                         {/* Replace with your content */}
                         <div className="absolute inset-0 px-4 sm:px-6">
-                            <div className="h-full border-2 border-dashed border-gray-200" aria-hidden="true" />
+
+                            <div className=' text-white m-2 rounded-full bg-purple-300 p-1 bg-opacity-50 flex justify-center place-items-cente'>
+                                <Image src="/unicorn.png" height={130} width={130} alt={""}
+                                    className="" />
+                            </div>
+                            <div className="h-full bg-slate-50" />
+
                         </div>
                         {/* /End replace */}
                     </div>
