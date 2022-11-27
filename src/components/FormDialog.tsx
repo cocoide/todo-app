@@ -16,7 +16,7 @@ export const FormDialog = (props: Props) => {
                 e.preventDefault()
                 props.onSubmit()
             }}
-            className="flex flex-raw bg-white h-10">
+            className="flex flex-raw bg-white h-10 ring-2 ring-purple-300 rounded-md">
 
 
             <div>

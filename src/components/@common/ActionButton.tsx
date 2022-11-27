@@ -1,6 +1,6 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
-import { BarsArrowDownIcon, PlusSmallIcon, SquaresPlusIcon } from '@heroicons/react/24/outline';
+import { ArrowsPointingInIcon, BarsArrowDownIcon, PlusSmallIcon, SquaresPlusIcon, XCircleIcon } from '@heroicons/react/24/outline';
 import { FormDialog } from '../FormDialog';
 import { useRecoilState } from 'recoil';
 import { inputTextState } from '../../@atoms/inputTextState';
@@ -96,22 +96,21 @@ export default function ActionButton() {
                                             onSubmit={(e) => {
                                                 e.preventDefault();
                                                 handleOnSubmit();
-                                            }} >
-                                            {/* formで囲まないとonSubmitが起動しないので注意 */}
-                                            <button
-                                                type="button"
-                                                className="inline-flex justify-center rounded-md border border-transparent bg-purple-100 px-4 py-2 text-sm font-medium text-purple-800 hover:bg-purple-200 focus:outline-none 
-                                            focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2"
-                                                onClick={closeModal}
-                                            >
-                                                CLOSE
+                                            }}
+                                            className="flex justify-between place-items-center">
+                                            {/* formで囲まないとonSubmitが起動しない */}
+                                            <button onClick={closeModal}
+                                            ><ArrowsPointingInIcon className='h-8 w-8  text-purple-300' />
                                             </button>
+
                                             <button
                                                 type='submit'
                                                 onSubmit={handleOnSubmit}
-                                                className="absolute bottom-5 right-5 rounded-full bg-purple-300 p-2 drop-shadow">
+                                                onClick={closeModal}
+                                                className="rounded-full bg-purple-300 p-2 drop-shadow">
                                                 <PlusSmallIcon className='h-8 w-8  text-white' />
                                             </button>
+
                                         </form>
                                     </div>
                                 </Dialog.Panel>
