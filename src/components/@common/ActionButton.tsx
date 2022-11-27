@@ -1,6 +1,6 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
-import { ArrowsPointingInIcon, BarsArrowDownIcon, PlusSmallIcon, SquaresPlusIcon, XCircleIcon } from '@heroicons/react/24/outline';
+import { ArrowsPointingInIcon, PlusSmallIcon, CheckBadgeIcon, PuzzlePieceIcon } from '@heroicons/react/24/outline';
 import { FormDialog } from '../FormDialog';
 import { useRecoilState } from 'recoil';
 import { inputTextState } from '../../@atoms/inputTextState';
@@ -39,14 +39,16 @@ export default function ActionButton() {
 
     return (
         <>
-            <div className="fixed bottom-5 right-3 flex items-center justify-center">
+            <div className="fixed bottom-8 right-3 flex items-center justify-center">
 
                 <button
                     type="button"
-                    onClick={openModal}
+                    onClick={() => {
+                        openModal()
+                    }}
                     className="rounded-full bg-purple-300 w-auto h-auto p-2 drop-shadow-xl"
                 ><PlusSmallIcon
-                        className='text-white h-8 w-8 ' />
+                        className='text-white h-9 w-9' />
                 </button>
             </div>
 
@@ -108,7 +110,7 @@ export default function ActionButton() {
                                                 onSubmit={handleOnSubmit}
                                                 onClick={closeModal}
                                                 className="rounded-full bg-purple-300 p-2 drop-shadow">
-                                                <PlusSmallIcon className='h-8 w-8  text-white' />
+                                                <PuzzlePieceIcon className='h-8 w-8  text-white' />
                                             </button>
 
                                         </form>

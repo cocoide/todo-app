@@ -4,6 +4,6 @@ import { atom } from 'recoil';
 const initialTodo: Todo[]=[];
 
 export const todoState=atom({
-    key: "task",
+    key: "todoState",
     default: initialTodo,
 })

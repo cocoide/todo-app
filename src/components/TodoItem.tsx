@@ -1,5 +1,4 @@
-import { ArchiveBoxXMarkIcon } from "@heroicons/react/24/outline"
-import { ArchiveBoxIcon } from "@heroicons/react/24/solid"
+import { ArchiveBoxIcon, ArchiveBoxXMarkIcon } from "@heroicons/react/24/outline"
 
 type Props = {
     todos: Todo[]
@@ -39,19 +38,19 @@ export const TodoItem = (props: Props) => {
             {filteredTodos.map((todo) => {
                 return <li key={todo.id}
 
-                    className="bg-white my-3 h-17 text-center text-slate-600 flex place-items-center
-                    drop-shadow"
+                    className="my-3 text-center text-slate-600 flex place-items-center
+                    "
                 ><input
                         type="checkbox"
                         checked={todo.checked}
                         onChange={() => props.onTodo(todo, "checked", !todo.checked)}
-                        className="m-3 accent-purple-300"
+                        className="m-3 accent-purple-300 h-7"
                     /><input
                         type="text"
                         disabled={todo.checked || todo.removed}
                         value={todo.value}
                         onChange={(e) => props.onTodo(todo, "value", e.target.value)}
-                        className="h-10 w-full pl-3 outline-purple-200"
+                        className="h-10 w-full pl-3 outline-purple-200 drop-shadow rounded-md"
                     /><button onClick={() => props.onTodo(todo, "removed", !todo.removed)}
                         className="p-2">{todo.removed ? <ArchiveBoxXMarkIcon className="h-6 w-6 text-purple-300" />
                             : <ArchiveBoxIcon className="h-6 w-6 text-purple-300" />}</button>
