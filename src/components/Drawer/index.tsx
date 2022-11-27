@@ -20,7 +20,7 @@ export const Drawer = () => {
                             <button
                                 type="button"
                                 onClick={() => setOpen(false)}
-                                className="h-10 w-10 text-purple-300"
+                                className="h-12 w-12 text-purple-300"
                             ><XCircleIcon />
                             </button>
 

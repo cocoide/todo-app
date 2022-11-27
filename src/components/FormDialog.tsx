@@ -19,8 +19,8 @@ export const FormDialog = (props: Props) => {
             className="flex flex-raw bg-white h-10 ring-2 ring-purple-300 rounded-md">
 
 
-            <div>
-                {/* <select
+            {/* <div>
+                <select
                     defaultValue="all"
                     // onChange={(e) => props.setFilter(e.target.value as Filter)}
                     className="text-center h-8 w-8 m-1 p-1 appearance-none bg-slate-100
@@ -30,8 +30,8 @@ export const FormDialog = (props: Props) => {
                     <option value="checked">☑</option>
                     <option value="unchecked">↺</option>
                     <option value="removed">🗑</option>
-                </select> */}
-            </div>
+                </select>
+            </div> */}
 
             <input
                 type="text"

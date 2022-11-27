@@ -35,7 +35,7 @@ export default function DrawerMotion({ open, setOpen, children }: React.PropsWit
                   leaveFrom="translate-x-0"
                   leaveTo="-translate-x-full"
                 >
-                  <Dialog.Panel className="pointer-events-auto relative w-screen max-w-[50%] md:max-w-[30%] lg:max-w-[20%]">
+                  <Dialog.Panel className="pointer-events-auto relative w-screen max-w-[65%] md:max-w-[30%] lg:max-w-[20%]">
 
                     {children}
 
