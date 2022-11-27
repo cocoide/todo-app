@@ -44,9 +44,9 @@ export default function ActionButton() {
                 <button
                     type="button"
                     onClick={openModal}
-                    className="rounded-full bg-white w-auto h-auto p-2 drop-shadow-xl"
+                    className="rounded-full bg-purple-300 w-auto h-auto p-2 drop-shadow-xl"
                 ><PlusSmallIcon
-                        className='text-purple-300 h-8 w-8 ' />
+                        className='text-white h-8 w-8 ' />
                 </button>
             </div>
 

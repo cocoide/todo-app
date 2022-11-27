@@ -11,17 +11,17 @@ export const Header = () => {
 
     return (
         <>
-            <div className="flex justify-between  place-items-center bg-white m-4  rounded-3xl mb-10">
+            <div className="flex justify-between  place-items-center 
+            bg-purple-200 m-4  rounded-3xl mb-10">
                 <button className="rounded-full">
                     <Bars4Icon
-                        className='10 w-10 text-purple-300 m-3'
+                        className='10 w-10 text-white m-3'
                         onClick={() => OpenDrawer(true)}
                     />
                 </button>
-                <h1 className=" text-3xl p-1 font-bold text-purple-300
-            shadow-purple-300/200"
+                <h1 className=" text-3xl p-1 font-bold text-white drop-shadow"
                 >To Do List</h1>
-                <div className='h-12 w-12  text-white m-2 rounded-full bg-purple-300 p-1 bg-opacity-50 flex justify-center place-items-cente'>
+                <div className='h-12 w-12 m-2 rounded-full  p-1 bg-white flex justify-center place-items-cente'>
                     <Image src="/unicorn.png" height={30} width={40} alt={""} />
                 </div>
             </div>

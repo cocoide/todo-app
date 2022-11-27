@@ -17,9 +17,9 @@ export default function Home() {
       <div>
         <Header />
 
-        <div className='flex justify-center place-items-center p-10'>
+        {/* <div className='flex justify-center place-items-center p-10'>
           <Image src="/flower.png" height={200} width={400} alt={""} />
-        </div>
+        </div> */}
 
         <div className='mx-20 shadow-purple-300/50'>
           <TodoApp />

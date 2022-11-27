@@ -39,7 +39,8 @@ export const TodoItem = (props: Props) => {
             {filteredTodos.map((todo) => {
                 return <li key={todo.id}
 
-                    className="bg-white my-3 h-17 text-center text-slate-600 flex place-items-center "
+                    className="bg-white my-3 h-17 text-center text-slate-600 flex place-items-center
+                    outline-double"
                 ><input
                         type="checkbox"
                         checked={todo.checked}
