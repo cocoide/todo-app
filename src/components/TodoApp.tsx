@@ -2,12 +2,13 @@ import { FC, useState } from "react"
 import { TodoItem } from "./TodoItem"
 import { useRecoilState } from 'recoil';
 import { todoState } from '../@atoms/todoState';
+import { filterState } from '../@atoms/filterState';
 
 
 
 export const TodoApp: FC = () => {
     const [todos, setTodos] = useRecoilState<Todo[]>(todoState)
-    const [filter, setFilter] = useState<Filter>("all");
+    const [filter, setFilter] = useRecoilState<Filter>(filterState);
 
 
     // 追加したTodoのプロパティを変化させる関数を

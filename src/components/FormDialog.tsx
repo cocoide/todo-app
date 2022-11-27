@@ -1,4 +1,6 @@
 import { PlusCircleIcon } from "@heroicons/react/24/outline";
+import { useState } from 'react';
+import useAutoFocus from '../utils/useAutoFocus';
 
 
 type Props = {
@@ -8,6 +10,9 @@ type Props = {
 };
 
 export const FormDialog = (props: Props) => {
+
+    const inputRef = useAutoFocus<HTMLInputElement>();
+
     return (
 
 
@@ -16,7 +21,7 @@ export const FormDialog = (props: Props) => {
                 e.preventDefault()
                 props.onSubmit()
             }}
-            className="flex flex-raw bg-white h-10 ring-2 ring-purple-300 rounded-md">
+            className="flex flex-raw bg-white h-10 rounded-md">
 
 
             {/* <div>
@@ -38,6 +43,7 @@ export const FormDialog = (props: Props) => {
                 value={props.text}
                 placeholder="INPUT NEW TASK"
                 onChange={props.onChange}
+                ref={inputRef}
                 className="outline-purple-200 text-center flex-1"
             />
         </form>
