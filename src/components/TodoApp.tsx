@@ -1,31 +1,13 @@
 import { FC, useState } from "react"
-import { FormDialog } from "./FormDialog"
 import { TodoItem } from "./TodoItem"
+import { useRecoilState } from 'recoil';
+import { todoState } from '../@atoms/todoState';
+
 
 
 export const TodoApp: FC = () => {
-    const [text, setText] = useState("")
-    const [todos, setTodos] = useState<Todo[]>([])
+    const [todos, setTodos] = useRecoilState<Todo[]>(todoState)
     const [filter, setFilter] = useState<Filter>("all");
-
-    const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setText(e.target.value);
-    };
-
-
-    const handleOnSubmit = () => {
-        // TODOが未入力なら、TODOを新規作成
-        if (!text) return
-        const newTodo: Todo = {
-            //newTodoの初期設定
-            value: text,
-            id: new Date().getTime(),
-            checked: false,
-            removed: false
-        }
-        setTodos([newTodo, ...todos])
-        setText("")
-    }
 
 
     // 追加したTodoのプロパティを変化させる関数を
@@ -59,11 +41,6 @@ export const TodoApp: FC = () => {
 
     return (
         <div>
-            <FormDialog
-                text={text}
-                onChange={handleOnChange}
-                onSubmit={handleOnSubmit}
-            />
 
             <TodoItem todos={todos} filter={filter} onTodo={handleOnTodo} />
 

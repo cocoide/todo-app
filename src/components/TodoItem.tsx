@@ -44,7 +44,7 @@ export const TodoItem = (props: Props) => {
                         type="checkbox"
                         checked={todo.checked}
                         onChange={() => props.onTodo(todo, "checked", !todo.checked)}
-                        className="m-3"
+                        className="m-3 accent-purple-300"
                     /><input
                         type="text"
                         disabled={todo.checked || todo.removed}
