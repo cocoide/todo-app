@@ -1,4 +1,4 @@
-import { FC, useState } from "react"
+import { FC } from "react"
 import { TodoItem } from "./TodoItem"
 import { useRecoilState } from 'recoil';
 import { todoState } from '../@atoms/todoState';

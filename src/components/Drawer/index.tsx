@@ -65,6 +65,14 @@ export const Drawer = () => {
                                 </button>
 
                                 <button onClick={() => {
+                                    handleOnSort("unchecked");
+                                    setOpen(false);
+                                }}
+                                    className="bg-slate-300 h-10 w-full rounded-md text-white mt-3">
+                                    未完了
+                                </button>
+
+                                <button onClick={() => {
                                     handleOnSort("removed");
                                     setOpen(false);
                                 }}
