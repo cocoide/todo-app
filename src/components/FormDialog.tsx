@@ -12,8 +12,6 @@ export const FormDialog = (props: Props) => {
 
 
     return (
-
-
         <form
             onSubmit={(e) => {
                 e.preventDefault()
